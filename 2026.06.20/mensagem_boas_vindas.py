@@ -4,6 +4,11 @@
 valor_dia_aluguel=float(input('digite o valor do aluguel:'))
 valor_km_aluguel=float(input('digite o valor do km percorrido n aluguel:'))
 
+
+
+
+
+
 dias_aluguel=int(input('Digite quantos dias de aluguel:'))
 km_percorrido=float(input('Digite a quantidade de km percorrido:'))    
 
