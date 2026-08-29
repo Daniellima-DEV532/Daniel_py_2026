@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VivaFit — academia completa para sua melhor versão." />
+  <title>VivaFit | Sua energia em movimento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --lime:#d7ff42; --ink:#101010; --muted:#656565; --paper:#f7f7f3; --line:#deded8; --orange:#ff6b35; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Manrope,Arial,sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    .container { width:min(1160px,calc(100% - 40px)); margin:auto; }
+    .tag { display:inline-flex; align-items:center; gap:8px; padding:7px 11px; border:1px solid currentColor; border-radius:100px; font:500 11px/1 "DM Mono",monospace; letter-spacing:.07em; text-transform:uppercase; }
+    .tag::before { content:""; width:7px; height:7px; background:currentColor; border-radius:50%; }
+    header { height:78px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #2c2c2c; }
+    .logo { font-size:25px; font-weight:800; letter-spacing:-1.8px; }
+    .logo span { color:var(--orange); }
+    nav { display:flex; align-items:center; gap:28px; font-size:13px; font-weight:700; }
+    nav a { opacity:.8; transition:.2s; } nav a:hover { opacity:1; color:var(--orange); }
+    .btn { border:0; border-radius:5px; padding:14px 19px; font:800 12px Manrope,sans-serif; cursor:pointer; transition:transform .2s, background .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-dark { background:var(--ink); color:white; } .btn-lime { background:var(--lime); color:var(--ink); }
+    .hero { background:var(--ink); color:white; overflow:hidden; }
+    .hero-content { min-height:540px; display:grid; grid-template-columns:1.1fr .9fr; align-items:center; position:relative; }
+    .hero h1 { font-size:clamp(46px,6.2vw,82px); max-width:700px; letter-spacing:-5px; line-height:.94; margin:22px 0; }
+    .hero h1 em { color:var(--lime); font-style:normal; }
+    .hero p { max-width:480px; color:#c2c2c2; font-size:16px; line-height:1.7; margin:0 0 28px; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
+    .hero-visual { height:100%; min-height:540px; position:relative; }
+    .shape { position:absolute; border-radius:50%; background:var(--lime); width:410px; height:410px; right:-70px; top:70px; }
+    .person { position:absolute; right:42px; bottom:0; width:285px; height:465px; background:linear-gradient(145deg,#ff9c7b 0 21%,#292929 21% 53%,#efeeea 53% 70%,#282828 70%); clip-path:polygon(41% 0,62% 0,73% 12%,69% 25%,92% 40%,100% 95%,75% 100%,66% 63%,52% 65%,47% 100%,12% 100%,20% 43%,36% 26%,31% 12%); filter:drop-shadow(20px 12px 0 rgba(0,0,0,.2)); }
+    .hero-stat { position:absolute; right:0; bottom:38px; width:185px; padding:17px; background:white; color:var(--ink); border-radius:7px; }
+    .hero-stat strong { display:block; font-size:26px; letter-spacing:-1px; } .hero-stat small { color:var(--muted); font:11px "DM Mono",monospace; }
+    .ticker { background:var(--lime); padding:14px 0; overflow:hidden; white-space:nowrap; font:800 16px "DM Mono",monospace; text-transform:uppercase; letter-spacing:-.5px; }
+    .ticker span { margin-right:32px; } .ticker b { color:var(--orange); font-size:19px; }
+    section { padding:92px 0; }
+    .section-heading { display:flex; justify-content:space-between; gap:30px; align-items:end; margin-bottom:40px; }
+    h2 { margin:12px 0 0; font-size:clamp(32px,4.2vw,54px); letter-spacing:-3px; line-height:1; }
+    .section-heading p { max-width:330px; margin:0; color:var(--muted); font-size:14px; line-height:1.6; }
+    .plans { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .plan { background:white; border:1px solid var(--line); border-radius:8px; padding:27px; min-height:385px; display:flex; flex-direction:column; transition:transform .25s,box-shadow .25s; }
+    .plan:hover { transform:translateY(-6px); box-shadow:0 15px 30px #10101013; }
+    .plan.featured { background:var(--ink); color:white; border-color:var(--ink); position:relative; }
+    .popular { position:absolute; top:18px; right:18px; color:var(--ink); background:var(--lime); padding:6px 8px; border-radius:3px; font:700 10px "DM Mono",monospace; text-transform:uppercase; }
+    .plan-name { font-size:20px; font-weight:800; } .plan-desc { font-size:13px; color:var(--muted); margin:8px 0 22px; } .featured .plan-desc,.featured li { color:#c1c1c1; }
+    .price { font-size:45px; letter-spacing:-3px; font-weight:800; } .price small { font-size:13px; letter-spacing:0; color:var(--muted); }
+    .plan ul { list-style:none; padding:0; margin:27px 0; font-size:13px; line-height:2.25; } .plan li::before { content:"✓"; color:var(--orange); font-weight:800; margin-right:9px; }
+    .plan .btn { width:100%; margin-top:auto; } .plan:not(.featured) .btn { background:#f0f0ec; }
+    .locations { background:#e8e8e2; }
+    .location-layout { display:grid; grid-template-columns:.95fr 1.05fr; gap:45px; align-items:start; }
+    .filters { display:flex; gap:8px; flex-wrap:wrap; margin:25px 0; }
+    .filter { border:1px solid #bdbdb7; background:transparent; padding:9px 13px; font:700 11px Manrope,sans-serif; border-radius:100px; cursor:pointer; }
+    .filter.active,.filter:hover { background:var(--ink); border-color:var(--ink); color:white; }
+    .map { min-height:375px; background:#cfcfc6; border-radius:7px; position:relative; overflow:hidden; background-image:linear-gradient(30deg,transparent 49%,#bbbcb3 50%,transparent 51%),linear-gradient(120deg,transparent 49%,#bbbcb3 50%,transparent 51%); background-size:110px 110px; }
+    .map::after { content:"MANAUS"; position:absolute; inset:0; display:grid; place-items:center; font:800 40px Manrope,sans-serif; letter-spacing:8px; color:#b5b6ad; }
+    .pin { position:absolute; z-index:1; width:16px; height:16px; border-radius:50% 50% 50% 0; background:var(--orange); transform:rotate(-45deg); box-shadow:0 2px 0 #9f3b18; cursor:pointer; } .pin::after { content:""; position:absolute; width:5px; height:5px; border-radius:50%; background:white; left:5px; top:5px; }
+    .pin.one { left:27%; top:34%; }.pin.two { left:65%; top:44%; }.pin.three { left:49%; top:72%; }
+    .unit-list { display:grid; gap:9px; }
+    .unit { background:white; border:1px solid transparent; padding:16px 18px; border-radius:5px; cursor:pointer; display:flex; gap:15px; align-items:center; transition:.2s; }
+    .unit:hover,.unit.selected { border-color:var(--orange); transform:translateX(4px); } .unit.hidden { display:none; }
+    .unit-number { color:var(--orange); font:500 11px "DM Mono",monospace; } .unit h3 { margin:2px 0 3px; font-size:15px; } .unit p { margin:0; color:var(--muted); font-size:11px; }
+    .unit-arrow { margin-left:auto; font-size:19px; }
+    .benefits { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); border-radius:7px; overflow:hidden; }
+    .benefit { padding:27px; min-height:185px; border-right:1px solid var(--line); } .benefit:last-child { border:0; }
+    .benefit-icon { display:grid; place-items:center; width:37px; height:37px; background:var(--lime); border-radius:50%; font-size:18px; } .benefit h3 { margin:20px 0 8px; font-size:16px; letter-spacing:-.5px; }.benefit p { margin:0; font-size:12px; color:var(--muted); line-height:1.6; }
+    .cta { padding:0 0 92px; }.cta-inner { padding:55px; border-radius:8px; background:var(--orange); display:flex; align-items:center; justify-content:space-between; gap:30px; }.cta h2 { max-width:650px; color:#fff; }.cta .btn { background:var(--ink); color:white; white-space:nowrap; }
+    footer { background:var(--ink); color:white; padding:48px 0 24px; } .footer-top { display:flex; justify-content:space-between; gap:30px; padding-bottom:42px; border-bottom:1px solid #3a3a3a; }.footer-top p { color:#aaa; font-size:13px; max-width:250px; line-height:1.6; }.footer-links { display:flex; gap:55px; }.footer-links div { display:grid; gap:10px; font-size:12px; color:#aaa; }.footer-links strong { color:white; font-size:12px; margin-bottom:4px; }.footer-bottom { padding-top:20px; display:flex; justify-content:space-between; color:#888; font:10px "DM Mono",monospace; }
+    .modal { display:none; position:fixed; z-index:5; inset:0; background:#0008; padding:20px; place-items:center; }.modal.open { display:grid; }.modal-box { position:relative; width:min(450px,100%); background:white; border-radius:8px; padding:34px; }.modal-box h2 { font-size:30px; }.close { position:absolute; right:18px; top:14px; background:transparent; border:0; font-size:25px; cursor:pointer; }.modal label { display:grid; gap:6px; font-size:12px; font-weight:700; margin-top:16px; }.modal input,.modal select { padding:12px; border:1px solid var(--line); border-radius:4px; font:14px Manrope,sans-serif; }.modal .btn { margin-top:22px; width:100%; }.success { display:none; background:#ecffd0; padding:12px; border-radius:4px; font-size:13px; margin-top:16px; }
+    @media (max-width:780px) { nav a { display:none; } .hero-content,.location-layout { grid-template-columns:1fr; }.hero-content { padding:70px 0 0; }.hero-visual { min-height:300px; }.shape { width:300px; height:300px; top:10px; }.person { height:300px; width:190px; right:25px; }.hero-stat { bottom:20px; }.plans,.benefits { grid-template-columns:1fr; }.benefit { border-right:0; border-bottom:1px solid var(--line); min-height:auto; }.section-heading,.cta-inner,.footer-top,.footer-bottom { align-items:flex-start; flex-direction:column; }.cta-inner { padding:34px; }.footer-links { gap:35px; }.hero h1 { letter-spacing:-3px; } }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="container">
+      <header>
+        <a class="logo" href="#inicio">VIVA<span>FIT</span></a>
+        <nav>
+          <a href="#planos">Planos</a>
+          <a href="#unidades">Unidades</a>
+          <a href="#beneficios">Benefícios</a>
+          <button class="btn btn-lime" onclick="openModal()">Começar agora</button>
+        </nav>
+      </header>
+    </div>
+
+    <main class="container hero-content" id="inicio">
+      <div>
+        <span class="tag" style="color:var(--lime)">Seu momento é agora</span>
+        <h1>Seu corpo.<br><em>Sua força.</em><br>Sua história.</h1>
+        <p>Treinos que cabem na sua rotina, uma comunidade que te impulsiona e uma estrutura feita para você evoluir.</p>
+        <div class="hero-actions">
+          <button class="btn btn-lime" onclick="document.querySelector('#planos').scrollIntoView()">Conheça os planos →</button>
+          <button class="btn" style="border:1px solid #606060;color:white;background:transparent" onclick="document.querySelector('#unidades').scrollIntoView()">Encontrar unidade</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="shape"></div>
+        <div class="person"></div>
+        <div class="hero-stat">
+          <strong>+15 mil</strong>
+          <small>ALUNOS EM MOVIMENTO</small>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="ticker">
+    <span>Treine do seu jeito <b>✦</b></span>
+    <span>Mais energia todo dia <b>✦</b></span>
+    <span>Sem taxa de matrícula <b>✦</b></span>
+    <span>Treine do seu jeito <b>✦</b></span>
+  </div>
+
+  <section id="planos" class="container">
+    <div class="section-heading">
+      <div>
+        <span class="tag">Planos VivaFit</span>
+        <h2>Escolha seu ritmo.</h2>
+      </div>
+      <p>Planos simples, sem letras miúdas. Você decide como e quando quer começar.</p>
+    </div>
+
+    <div class="plans">
+      <article class="plan">
+        <div class="plan-name">Start</div>
+        <p class="plan-desc">Para dar o primeiro passo.</p>
+        <div class="price">R$ 79<small>,90/mês</small></div>
+        <ul>
+          <li>Acesso a 1 unidade</li>
+          <li>Musculação e cardio</li>
+          <li>Aulas coletivas</li>
+          <li>App VivaFit</li>
+        </ul>
+        <button class="btn" onclick="openModal('Start')">Escolher Start</button>
+      </article>
+
+      <article class="plan featured">
+        <span class="popular">Mais escolhido</span>
+        <div class="plan-name">Move</div>
+        <p class="plan-desc">Liberdade para ir além.</p>
+        <div class="price">R$ 109<small>,90/mês</small></div>
+        <ul>
+          <li>Acesso a todas as unidades</li>
+          <li>Musculação e cardio</li>
+          <li>Todas as aulas coletivas</li>
+          <li>1 convidado/mês</li>
+          <li>Treino personalizado</li>
+        </ul>
+        <button class="btn btn-lime" onclick="openModal('Move')">Escolher Move</button>
+      </article>
+
+      <article class="plan">
+        <div class="plan-name">Power</div>
+        <p class="plan-desc">Performance sem limites.</p>
+        <div class="price">R$ 149<small>,90/mês</small></div>
+        <ul>
+          <li>Tudo do plano Move</li>
+          <li>Convidados ilimitados</li>
+          <li>Avaliação física mensal</li>
+          <li>Área recovery</li>
+          <li>Estacionamento incluso</li>
+        </ul>
+        <button class="btn" onclick="openModal('Power')">Escolher Power</button>
+      </article>
+    </div>
+  </section>
+  <section class="locations" id="unidades">
+    <div class="container location-layout">
+      <div>
+        <span class="tag">Nossas unidades</span>
+        <h2>Uma VivaFit<br>perto de você.</h2>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6;margin:18px 0 0">Encontre a unidade ideal para o seu treino.</p>
+        <div class="filters">
+          <button class="filter active" data-filter="all">Todas</button>
+          <button class="filter" data-filter="zona-norte">Zona Norte</button>
+          <button class="filter" data-filter="centro">Centro</button>
+          <button class="filter" data-filter="zona-sul">Zona Sul</button>
+        </div>
+        <div class="unit-list">
+          <article class="unit selected" data-area="zona-norte">
+            <span class="unit-number">01</span><div><h3>VivaFit Parque Dez</h3><p>Av. das Torres, 825 · 05h às 23h</p></div><span class="unit-arrow">→</span>
+          </article>
+          <article class="unit" data-area="centro">
+            <span class="unit-number">02</span><div><h3>VivaFit Centro</h3><p>Rua 24 de Maio, 412 · 06h às 22h</p></div><span class="unit-arrow">→</span>
+          </article>
+          <article class="unit" data-area="zona-sul">
+            <span class="unit-number">03</span><div><h3>VivaFit Ponta Negra</h3><p>Av. Coronel Teixeira, 1900 · 05h às 23h</p></div><span class="unit-arrow">→</span>
+          </article>
+        </div>
+      </div>
+      <div class="map" aria-label="Mapa ilustrativo de Manaus">
+        <i class="pin one"></i><i class="pin two"></i><i class="pin three"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="beneficios">
+    <div class="section-heading"><div><span class="tag">Muito além do treino</span><h2>Feita para sua rotina.</h2></div></div>
+    <div class="benefits">
+      <article class="benefit"><div class="benefit-icon">⌁</div><h3>App completo</h3><p>Treinos, evolução e agenda na palma da sua mão.</p></article>
+      <article class="benefit"><div class="benefit-icon">◴</div><h3>Horários estendidos</h3><p>Mais liberdade para você encaixar o treino no dia.</p></article>
+      <article class="benefit"><div class="benefit-icon">✦</div><h3>Aulas para todos</h3><p>Bike, dança, funcional e muito mais para experimentar.</p></article>
+      <article class="benefit"><div class="benefit-icon">♡</div><h3>Comunidade Viva</h3><p>Gente que torce pelo seu progresso em cada etapa.</p></article>
+    </div>
+  </section>
+
+  <div class="container cta">
+    <div class="cta-inner">
+      <div><span class="tag" style="color:white">Primeiro treino grátis</span><h2>O melhor dia para começar é hoje.</h2></div>
+      <button class="btn" onclick="openModal()">Quero meu passe grátis →</button>
+    </div>
+  </div>
+
+  <footer><div class="container"><div class="footer-top"><div><div class="logo">VIVA<span>FIT</span></div><p>Movimento para uma vida mais forte, leve e cheia de energia.</p></div><div class="footer-links"><div><strong>VIVAFIT</strong><a href="#planos">Planos</a><a href="#unidades">Unidades</a><a href="#beneficios">Benefícios</a></div><div><strong>ATENDIMENTO</strong><a href="tel:92999999999">(92) 9999-9999</a><a href="mailto:ola@vivafit.com">ola@vivafit.com</a><a href="#inicio">Fale conosco</a></div></div></div><div class="footer-bottom"><span>© 2026 VIVAFIT. TODOS OS DIREITOS RESERVADOS.</span><span>FEITO PARA SE MOVIMENTAR.</span></div></div></footer>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-box"><button class="close" aria-label="Fechar" onclick="closeModal()">×</button><span class="tag">Vamos começar</span><h2 id="modal-title">Seu passe está quase pronto.</h2><form id="lead-form"><label>Seu nome<input required placeholder="Como podemos te chamar?" /></label><label>WhatsApp<input required type="tel" placeholder="(00) 00000-0000" /></label><label>Plano de interesse<select id="plan-select"><option>Quero conhecer a academia</option><option>Start</option><option>Move</option><option>Power</option></select></label><button class="btn btn-dark" type="submit">Quero falar com a VivaFit</button></form><div class="success" id="success">Pronto! Recebemos seus dados e entraremos em contato em breve.</div></div></div>
+  <script>
+    const modal=document.getElementById('modal'), select=document.getElementById('plan-select');
+    function openModal(plan){ modal.classList.add('open'); document.body.style.overflow='hidden'; if(plan) select.value=plan; }
+    function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+    modal.addEventListener('click',e=>{if(e.target===modal)closeModal()}); document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+    document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{document.querySelector('.filter.active').classList.remove('active');button.classList.add('active');document.querySelectorAll('.unit').forEach(unit=>unit.classList.toggle('hidden',button.dataset.filter!=='all'&&unit.dataset.area!==button.dataset.filter))}));
+    document.querySelectorAll('.unit').forEach(unit=>unit.addEventListener('click',()=>{document.querySelectorAll('.unit').forEach(u=>u.classList.remove('selected'));unit.classList.add('selected')}));
+    document.getElementById('lead-form').addEventListener('submit',e=>{e.preventDefault();e.target.style.display='none';document.getElementById('success').style.display='block'});
+  </script>
+</body>
+</html>
